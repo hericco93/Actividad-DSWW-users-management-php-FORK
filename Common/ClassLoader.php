@@ -80,6 +80,65 @@ final class ClassLoader
         'Flash' => 'Infrastructure/Entrypoints/Web/Presentation/Flash.php',
 
         'DependencyInjection' => 'Common/DependencyInjection.php',
+
+        // --- Entidad Aplicacion ---
+        'InvalidApplicationIdException' => 'Domain/Exceptions/InvalidApplicationIdException.php',
+        'InvalidApplicationDataException' => 'Domain/Exceptions/InvalidApplicationDataException.php',
+        'InvalidApplicationArchitectureException' => 'Domain/Exceptions/InvalidApplicationArchitectureException.php',
+        'InvalidApplicationLicenseException' => 'Domain/Exceptions/InvalidApplicationLicenseException.php',
+        'ApplicationAlreadyExistsException' => 'Domain/Exceptions/ApplicationAlreadyExistsException.php',
+        'ApplicationNotFoundException' => 'Domain/Exceptions/ApplicationNotFoundException.php',
+
+        'ApplicationBitsEnum' => 'Domain/Enums/ApplicationBitsEnum.php',
+        'ApplicationLicenseEnum' => 'Domain/Enums/ApplicationLicenseEnum.php',
+
+        'ApplicationId' => 'Domain/ValueObjects/ApplicationId.php',
+        'ApplicationPrice' => 'Domain/ValueObjects/ApplicationPrice.php',
+        'ApplicationInstallerSize' => 'Domain/ValueObjects/ApplicationInstallerSize.php',
+        'ApplicationWebUrl' => 'Domain/ValueObjects/ApplicationWebUrl.php',
+        'ApplicationContactEmail' => 'Domain/ValueObjects/ApplicationContactEmail.php',
+
+        'ApplicationCreatedDomainEvent' => 'Domain/Events/ApplicationCreatedDomainEvent.php',
+        'ApplicationUpdatedDomainEvent' => 'Domain/Events/ApplicationUpdatedDomainEvent.php',
+        'ApplicationDeletedDomainEvent' => 'Domain/Events/ApplicationDeletedDomainEvent.php',
+
+        'ApplicationModel' => 'Domain/Models/ApplicationModel.php',
+
+        'CreateApplicationUseCase' => 'Application/Ports/In/CreateApplicationUseCase.php',
+        'UpdateApplicationUseCase' => 'Application/Ports/In/UpdateApplicationUseCase.php',
+        'DeleteApplicationUseCase' => 'Application/Ports/In/DeleteApplicationUseCase.php',
+        'GetApplicationByIdUseCase' => 'Application/Ports/In/GetApplicationByIdUseCase.php',
+        'GetAllApplicationsUseCase' => 'Application/Ports/In/GetAllApplicationsUseCase.php',
+
+        'SaveApplicationPort' => 'Application/Ports/Out/SaveApplicationPort.php',
+        'UpdateApplicationPort' => 'Application/Ports/Out/UpdateApplicationPort.php',
+        'DeleteApplicationPort' => 'Application/Ports/Out/DeleteApplicationPort.php',
+        'GetApplicationByIdPort' => 'Application/Ports/Out/GetApplicationByIdPort.php',
+        'GetAllApplicationsPort' => 'Application/Ports/Out/GetAllApplicationsPort.php',
+
+        'CreateApplicationCommand' => 'Application/Services/Dto/Command/CreateApplicationCommand.php',
+        'UpdateApplicationCommand' => 'Application/Services/Dto/Command/UpdateApplicationCommand.php',
+        'DeleteApplicationCommand' => 'Application/Services/Dto/Command/DeleteApplicationCommand.php',
+        'GetApplicationByIdQuery' => 'Application/Services/Dto/Query/GetApplicationByIdQuery.php',
+        'ApplicationResponseDto' => 'Application/Services/Dto/Response/ApplicationResponseDto.php',
+
+        'ApplicationMapper' => 'Application/Services/Mappers/ApplicationMapper.php',
+        'CreateApplicationService' => 'Application/Services/CreateApplicationService.php',
+        'GetAllApplicationsService' => 'Application/Services/GetAllApplicationsService.php',
+        'GetApplicationByIdService' => 'Application/Services/GetApplicationByIdService.php',
+        'UpdateApplicationService' => 'Application/Services/UpdateApplicationService.php',
+        'DeleteApplicationService' => 'Application/Services/DeleteApplicationService.php',
+
+        'ApplicationPersistenceDto' => 'Infrastructure/Persistence/Dto/ApplicationPersistenceDto.php',
+        'ApplicationEntity' => 'Infrastructure/Persistence/Entities/ApplicationEntity.php',
+        'ApplicationPersistenceMapper' => 'Infrastructure/Persistence/Mappers/ApplicationPersistenceMapper.php',
+        'ApplicationRepositoryMySQL' => 'Infrastructure/Persistence/Repositories/ApplicationRepositoryMySQL.php',
+
+        'CreateApplicationWebRequest' => 'Infrastructure/Entrypoints/Web/Controllers/Request/CreateApplicationWebRequest.php',
+        'UpdateApplicationWebRequest' => 'Infrastructure/Entrypoints/Web/Controllers/Request/UpdateApplicationWebRequest.php',
+        'ApplicationResponse' => 'Infrastructure/Entrypoints/Web/Controllers/Response/ApplicationResponse.php',
+        'ApplicationWebMapper' => 'Infrastructure/Entrypoints/Web/Controllers/Mapper/ApplicationWebMapper.php',
+        'ApplicationController' => 'Infrastructure/Entrypoints/Web/Controllers/ApplicationController.php',
     );
 
     public static function register(): void

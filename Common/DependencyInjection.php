@@ -156,4 +156,85 @@ final class DependencyInjection
             self::getUserRepository()
         );
     }
+
+    public static function getApplicationRepository(): ApplicationRepositoryMySQL
+    {
+        ClassLoader::loadClass('ApplicationRepositoryMySQL');
+
+        return new ApplicationRepositoryMySQL(
+            self::getPdo()
+        );
+    }
+
+    public static function getCreateApplicationUseCase(): CreateApplicationUseCase
+    {
+        ClassLoader::loadClass('CreateApplicationService');
+        $repository = self::getApplicationRepository();
+
+        return new CreateApplicationService(
+            $repository,
+            $repository
+        );
+    }
+
+    public static function getUpdateApplicationUseCase(): UpdateApplicationUseCase
+    {
+        ClassLoader::loadClass('UpdateApplicationService');
+        $repository = self::getApplicationRepository();
+
+        return new UpdateApplicationService(
+            $repository,
+            $repository
+        );
+    }
+
+    public static function getGetApplicationByIdUseCase(): GetApplicationByIdUseCase
+    {
+        ClassLoader::loadClass('GetApplicationByIdService');
+
+        return new GetApplicationByIdService(
+            self::getApplicationRepository()
+        );
+    }
+
+    public static function getGetAllApplicationsUseCase(): GetAllApplicationsUseCase
+    {
+        ClassLoader::loadClass('GetAllApplicationsService');
+
+        return new GetAllApplicationsService(
+            self::getApplicationRepository()
+        );
+    }
+
+    public static function getDeleteApplicationUseCase(): DeleteApplicationUseCase
+    {
+        ClassLoader::loadClass('DeleteApplicationService');
+        $repository = self::getApplicationRepository();
+
+        return new DeleteApplicationService(
+            $repository,
+            $repository
+        );
+    }
+
+    public static function getApplicationWebMapper(): ApplicationWebMapper
+    {
+        ClassLoader::loadClass('ApplicationWebMapper');
+
+        return new ApplicationWebMapper();
+    }
+
+    public static function getApplicationController(): ApplicationController
+    {
+        ClassLoader::loadClass('ApplicationController');
+
+        return new ApplicationController(
+            self::getCreateApplicationUseCase(),
+            self::getUpdateApplicationUseCase(),
+            self::getGetApplicationByIdUseCase(),
+            self::getGetAllApplicationsUseCase(),
+            self::getDeleteApplicationUseCase(),
+            self::getApplicationWebMapper()
+        );
+    }
 }

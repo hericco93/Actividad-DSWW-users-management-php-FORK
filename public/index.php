@@ -316,6 +316,99 @@ try {
             View::redirect('users.index');
             break;
 
+        case 'applications.index':
+            $controller = DependencyInjection::getApplicationController();
+            $applications = $controller->index();
+            View::render('applications/list', array(
+                'pageTitle' => 'Lista de aplicaciones',
+                'applications' => $applications,
+                'message' => Flash::message(),
+                'success' => Flash::success(),
+            ));
+            break;
+
+        case 'applications.create':
+            ClassLoader::loadClass('ApplicationBitsEnum');
+            ClassLoader::loadClass('ApplicationLicenseEnum');
+            View::render('applications/create', array(
+                'pageTitle' => 'Registrar aplicación',
+                'bitsOptions' => ApplicationBitsEnum::allowedValues(),
+                'licenseOptions' => ApplicationLicenseEnum::allowedValues(),
+                'message' => Flash::message(),
+                'errors' => Flash::errors(),
+                'old' => Flash::old(),
+            ));
+            break;
+
+        case 'applications.store':
+            $controller = DependencyInjection::getApplicationController();
+            $request = CreateApplicationWebRequest::fromArray($_POST);
+            $controller->store($request);
+            Flash::setSuccess('Aplicación registrada correctamente.');
+            View::redirect('applications.index');
+            break;
+
+        case 'applications.show':
+            $controller = DependencyInjection::getApplicationController();
+            $id = isset($_GET['id']) ? trim((string) $_GET['id']) : '';
+            $application = $controller->show($id);
+            View::render('applications/show', array(
+                'pageTitle' => 'Detalle de aplicación',
+                'application' => $application,
+                'message' => Flash::message(),
+            ));
+            break;
+
+        case 'applications.edit':
+            ClassLoader::loadClass('ApplicationBitsEnum');
+            ClassLoader::loadClass('ApplicationLicenseEnum');
+            $controller = DependencyInjection::getApplicationController();
+            $id = isset($_GET['id']) ? trim((string) $_GET['id']) : '';
+            $application = $controller->show($id);
+            View::render('applications/edit', array(
+                'pageTitle' => 'Editar aplicación',
+                'application' => $application,
+                'bitsOptions' => ApplicationBitsEnum::allowedValues(),
+                'licenseOptions' => ApplicationLicenseEnum::allowedValues(),
+                'message' => Flash::message(),
+                'errors' => Flash::errors(),
+                'old' => Flash::old(),
+            ));
+            break;
+
+        case 'applications.update':
+            $controller = DependencyInjection::getApplicationController();
+            $request = UpdateApplicationWebRequest::fromArray($_POST);
+            $controller->update($request);
+            Flash::setSuccess('Aplicación actualizada correctamente.');
+            View::redirect('applications.index');
+            break;
+
+        case 'applications.delete':
+            $controller = DependencyInjection::getApplicationController();
+            $id = isset($_POST['id']) ? trim((string) $_POST['id']) : '';
+            $controller->delete($id);
+            Flash::setSuccess('Aplicación eliminada correctamente.');
+            View::redirect('applications.index');
+            break;
+
+        case 'applications.store':
+            Flash::setOld($_POST);
+            View::redirect('applications.create');
+            break;
+
+        case 'applications.update':
+            $updateId = trim((string) ($_POST['id'] ?? ''));
+            Flash::setOld($_POST);
+            header('Location: ?route=applications.edit&id=' . urlencode($updateId));
+            exit;
+
+        case 'applications.show':
+        case 'applications.edit':
+        case 'applications.delete':
+            View::redirect('applications.index');
+            break;
+
         default:
             View::render('home', buildHomeViewData($msg));
             break;

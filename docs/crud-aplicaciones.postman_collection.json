@@ -1,0 +1,180 @@
+{
+  "info": {
+    "_postman_id": "a21b4c8d-9e0f-4a1b-8c2d-3e4f5a6b7c8d",
+    "name": "CRUDL Aplicaciones - Arquitectura Hexagonal PHP",
+    "description": "Colección de pruebas para autenticación y operaciones CRUDL de la entidad Aplicacion (Ejercicio #21).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/crud-usuarios/public/index.php",
+      "type": "string"
+    },
+    {
+      "key": "application_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Autenticación (Login)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "email", "value": "admin@crud.com", "type": "text" },
+            { "key": "password", "value": "admin123", "type": "text" }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}?route=auth.authenticate",
+          "host": ["{{base_url}}"],
+          "query": [{ "key": "route", "value": "auth.authenticate" }]
+        }
+      }
+    },
+    {
+      "name": "2. Listar Aplicaciones (List)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}?route=applications.index",
+          "host": ["{{base_url}}"],
+          "query": [{ "key": "route", "value": "applications.index" }]
+        }
+      }
+    },
+    {
+      "name": "3. Formulario Registrar Aplicación (Create Form)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}?route=applications.create",
+          "host": ["{{base_url}}"],
+          "query": [{ "key": "route", "value": "applications.create" }]
+        }
+      }
+    },
+    {
+      "name": "4. Guardar Nueva Aplicación (Create / Store)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "nombre", "value": "Visual Studio Code", "type": "text" },
+            { "key": "proveedor", "value": "Microsoft", "type": "text" },
+            { "key": "categoria", "value": "Desarrollo", "type": "text" },
+            { "key": "lenguaje_principal", "value": "TypeScript", "type": "text" },
+            { "key": "lenguaje_secundario", "value": "JavaScript", "type": "text" },
+            { "key": "usa_bd", "value": "0", "type": "text" },
+            { "key": "requiere_conexion_red", "value": "1", "type": "text" },
+            { "key": "num_bits", "value": "64", "type": "text" },
+            { "key": "sistema_operativo", "value": "Multiplataforma", "type": "text" },
+            { "key": "requisitos_hardware", "value": "Procesador 1.6 GHz, 2 GB RAM, 500 MB disco", "type": "text" },
+            { "key": "licencia", "value": "FREEWARE", "type": "text" },
+            { "key": "precio", "value": "0.00", "type": "text" },
+            { "key": "descripcion", "value": "Editor de código fuente ligero y extensible", "type": "text" },
+            { "key": "web", "value": "https://code.visualstudio.com", "type": "text" },
+            { "key": "correo", "value": "support@visualstudio.com", "type": "text" },
+            { "key": "tamano_instalador", "value": "95.50", "type": "text" }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}?route=applications.store",
+          "host": ["{{base_url}}"],
+          "query": [{ "key": "route", "value": "applications.store" }]
+        }
+      }
+    },
+    {
+      "name": "5. Consultar Aplicación por ID (Read / Show)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}?route=applications.show&id={{application_id}}",
+          "host": ["{{base_url}}"],
+          "query": [
+            { "key": "route", "value": "applications.show" },
+            { "key": "id", "value": "{{application_id}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. Formulario Editar Aplicación (Edit Form)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}?route=applications.edit&id={{application_id}}",
+          "host": ["{{base_url}}"],
+          "query": [
+            { "key": "route", "value": "applications.edit" },
+            { "key": "id", "value": "{{application_id}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "7. Actualizar Aplicación (Update)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "id", "value": "{{application_id}}", "type": "text" },
+            { "key": "nombre", "value": "Visual Studio Code Insiders", "type": "text" },
+            { "key": "proveedor", "value": "Microsoft", "type": "text" },
+            { "key": "categoria", "value": "Desarrollo", "type": "text" },
+            { "key": "lenguaje_principal", "value": "TypeScript", "type": "text" },
+            { "key": "lenguaje_secundario", "value": "C++", "type": "text" },
+            { "key": "usa_bd", "value": "0", "type": "text" },
+            { "key": "requiere_conexion_red", "value": "1", "type": "text" },
+            { "key": "num_bits", "value": "64", "type": "text" },
+            { "key": "sistema_operativo", "value": "Multiplataforma", "type": "text" },
+            { "key": "requisitos_hardware", "value": "Procesador 1.8 GHz, 4 GB RAM, 600 MB disco", "type": "text" },
+            { "key": "licencia", "value": "OPEN_SOURCE", "type": "text" },
+            { "key": "precio", "value": "0.00", "type": "text" },
+            { "key": "descripcion", "value": "Compilación diaria con características experimentales", "type": "text" },
+            { "key": "web", "value": "https://code.visualstudio.com/insiders", "type": "text" },
+            { "key": "correo", "value": "support@visualstudio.com", "type": "text" },
+            { "key": "tamano_instalador", "value": "102.30", "type": "text" }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}?route=applications.update",
+          "host": ["{{base_url}}"],
+          "query": [{ "key": "route", "value": "applications.update" }]
+        }
+      }
+    },
+    {
+      "name": "8. Eliminar Aplicación (Delete)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "id", "value": "{{application_id}}", "type": "text" }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}?route=applications.delete",
+          "host": ["{{base_url}}"],
+          "query": [{ "key": "route", "value": "applications.delete" }]
+        }
+      }
+    }
+  ]
+}

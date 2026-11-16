@@ -1,0 +1,47 @@
+name: CI/CD - PHP Hexagonal CRUDL Aplicaciones
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-build:
+    name: Validar sintaxis PHP 8.3 y Build Docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obtener código del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo, pdo_mysql, mbstring
+          coverage: none
+
+      - name: Verificar sintaxis de todos los archivos PHP
+        run: find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l
+
+      - name: Construir imagen Docker de verificación
+        run: docker build -t crud-aplicaciones-php:ci .
+
+  deploy:
+    name: Despliegue continuo en la nube
+    needs: lint-and-build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Activar Deploy Hook (Render / Railway)
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
+        run: |
+          if [ -n "$DEPLOY_HOOK_URL" ]; then
+            curl -fsSL -X POST "$DEPLOY_HOOK_URL"
+            echo "Despliegue disparado correctamente."
+          else
+            echo "DEPLOY_HOOK_URL no configurado; omitiendo webhook."
+          fi

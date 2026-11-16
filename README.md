@@ -114,3 +114,15 @@ Aplicación web PHP para la gestión de usuarios: registro, listado, visualizaci
 
 - Credenciales fuera del código fuente y del historial de git
 
+---
+
+## Módulo Implementado: Gestión de Aplicaciones (Ejercicio #21)
+
+Se extendió la arquitectura hexagonal incorporando el CRUDL completo para la entidad **Aplicación** con sus 16 atributos de negocio (`nombre`, `proveedor`, `categoria`, `lenguajePrincipal`, `lenguajeSecundario`, `usaBd`, `requiereConexionRed`, `numBits`, `sistemaOperativo`, `requisitosHardware`, `licencia`, `precio`, `descripcion`, `web`, `correo`, `tamanoInstalador`).
+
+### Ejecución con Docker Compose
+
+1. Copiar `.env.example` a `.env` y configurar las credenciales de la base de datos MySQL en la nube.
+2. Levantar el contenedor:
+   ```bash
+   docker compose up --build -d
